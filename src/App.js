@@ -27,6 +27,7 @@ const App = () => {
   const [accessToken, setAccessToken] = useState("")
   const [searchInput, setSearchInput] = useState("")
   const [songs, setSongs] = useState([])
+  const [userID, setUserID] = useState("")
 
   useEffect(() => {
     if (window.location.hash) {
@@ -65,7 +66,8 @@ const App = () => {
     var userObject = await fetch('https://api.spotify.com/v1/me/', params)
       .then(response => response.json()).then(data => { return data })
     
-    console.log(userObject)
+    setUserID(userObject.id)
+    console.log(userID)
   }
 
   async function getPlaylist(id) { 
@@ -90,9 +92,16 @@ const App = () => {
     });
   }
 
+  async function createPlaylist(name, description, isPublic) { 
+
+    const endpoint = ''
+  }
   return (
     <div className="App">
-      <Container style={{ background: 'linear-gradient(120deg, #1DB954, #191414)' }}>
+      <Container
+        style={{backgroundColor: 'linear-gradient(120deg, #1DB954, #191414)'}}
+      >
+      
         <TextField label={"Text Value"} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
 
         <Button
