@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import axios from "axios"
 import { Container, Button, TextField, List, ListItem, ListItemText } from '@mui/material';
 
 const CLIENT_ID = process.env.REACT_APP_API_KEY
@@ -26,9 +25,8 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 const App = () => {
   
   const [accessToken, setAccessToken] = useState("")
-  const [input, setInput] = useState("")
-  const [playlists, setPlaylists] = useState([])
-  const [loggedIn, setLoggedIn] = useState("")
+  const [searchInput, setSearchInput] = useState("")
+  const [songs, setSongs] = useState([])
 
   useEffect(() => {
     if (window.location.hash) {
@@ -42,11 +40,16 @@ const App = () => {
       localStorage.setItem("tokenType", token_type);
       localStorage.setItem("expiresIn", expires_in);
     }
-  });
+  }, []);
 
   const handleLogin = () => {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_PARAM}&response_type=token&show_dialog=true`;
   };
+
+  // function songFormat(name, artists) { 
+  //   const first = artists[]
+  //   return `${name} - ${artist}`
+  // }
 
   async function retrieveUser() { 
 
@@ -63,14 +66,34 @@ const App = () => {
       .then(response => response.json()).then(data => { return data })
     
     console.log(userObject)
-    setLoggedIn(userObject.display_name)
+  }
 
+  async function getPlaylist(id) { 
+  
+    const endpoint = `https://api.spotify.com/v1/playlists/${id}`
+    var params = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + accessToken
+      }
+    }
+
+    var ret = await fetch(endpoint, params)
+      .then(response => response.json()).then(data => { return data })
+
+    setSongs(ret.tracks.items)
+    console.log(songs)
+
+    songs.forEach(function (item, index) {
+      console.log(item.track.name, index);
+    });
   }
 
   return (
     <div className="App">
       <Container style={{ background: 'linear-gradient(120deg, #1DB954, #191414)' }}>
-        <TextField label={"Text Value"} value={loggedIn} />
+        <TextField label={"Text Value"} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
 
         <Button
           variant="contained"
@@ -97,17 +120,20 @@ const App = () => {
           }}
           size="large"
 
-          onClick={() => retrieveUser()}
+          onClick={() => {
+            retrieveUser()
+            getPlaylist(searchInput.substring(34, 56))
+          }}
         >
           Search
         </Button>
         <List>
           {
-            playlists.map((playlist, i) => {
+            songs.map((song, i) => {
 
               return (
                 <ListItem>
-                  <ListItemText primary={`${playlist.name}`}/>
+                  <ListItemText primary={`${song.track.name}`}/>
                 </ListItem>
               )
             })}
