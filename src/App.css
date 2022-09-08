@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-size: 1rem;
 }
 
 .container{
@@ -21,10 +22,25 @@
   padding: 1.5rem !important;
 }
 
-.custom-btn:hover{
-  transform: scale(1.25) !important;
+
+.form {
+  display: flex; 
+  flex-direction: row;
+  /* grid-column: 2; */
+  width: 75%;
+  padding: 3rem;
+  margin-top: 7em;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+
+.input {
+  flex: 8;
+  padding: 0.5em 0.75em;
+  margin-right: 3em;
+  border-radius: 1em;
+  border: none;
+}
+
+.grid {
+  width: 75%;
 }

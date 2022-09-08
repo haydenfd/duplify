@@ -2,29 +2,36 @@ import React, { useEffect, useState, useCallback } from 'react'
 import './App.css'
 import { makeStyles } from '@mui/styles'
 import styled from "styled-components"
-import { Container, Card, FormControl, TextField, FormGroup } from '@mui/material'
+import { Container, Card } from '@mui/material'
 
-
-// const useStyles = makeStyles({
-//   field: {
-//     marginTop: 30, 
-//     marginBottom: 20, 
-//     paddingTop: 30,
-//     borderColor: 'red',
-//     display: 'block'
-//   }
-// })
 
 const Button = styled.button`
   background-color: #1ed760; 
-
-  width: 20%;
+  transition: transform 0.35s ease-out;
+  width: auto;
   border-radius: 10px;
-  padding: 2rem;
   border: none; 
-  height: auto;
-  margin: 2rem;
-`
+  height: auto;  
+  padding: 0.7em 0.75em;
+  flex: 1;
+  box-shadow: 2px 3px 4px #999;
+  border-radius: 3px;
+  font-weight: 400;
+  :hover {
+    color: white;
+  }
+
+  :active {
+    top: -200%;
+    width: 150%;
+    height: 300%;
+    box-shadow: 0 1.5px 2px #666;
+    transform: translateY(1rem);
+    transform: translateX(0.15rem);
+    color: white;
+  }
+
+  `
 
 //auth
 const CLIENT_ID = process.env.REACT_APP_API_KEY
@@ -156,15 +163,45 @@ const App = () => {
 
   return (
     <div className="App">
-      <form noValidate autoComplete="off">
-        <label>
-          Enter Playlist URL
-          <input type="text" name="name" />
-        </label>
+      <div className="form">
+        <input type="text" placeholder="Enter playlist URL" className="input"/>
         <Button>
          Submit
         </Button>
-        </form>
+      </div>
+      <div className="grid">
+        <Card
+          variant="outlined"
+          style={{
+            borderColor: '#1ed760',
+            backgroundColor: 'grey',
+            padding: '2rem 0rem',
+            marginBottom: '2rem'
+          }}
+        >
+          Song #1</Card>
+        <Card
+          variant="outlined"
+          style={{
+            borderColor: '#1ed760',
+            backgroundColor: 'grey',
+            padding: '2rem 0rem', 
+            marginBottom:'2rem'
+          }}
+        >
+          Song #1</Card>
+        <Card
+          variant="outlined"
+          style={{
+            borderColor: '#1ed760',
+            backgroundColor: 'grey',
+            padding: '2rem 0rem'
+          }}
+        >
+          Song #1</Card>
+
+
+      </div>
 
       {/* <Container
         style={{backgroundColor: 'linear-gradient(120deg, #1DB954, #191414)'}}
