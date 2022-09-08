@@ -1,6 +1,30 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import './App.css'
-import { Container, Button, TextField, List, ListItem, ListItemText } from '@mui/material';
+import { makeStyles } from '@mui/styles'
+import styled from "styled-components"
+import { Container, Card, FormControl, TextField, FormGroup } from '@mui/material'
+
+
+// const useStyles = makeStyles({
+//   field: {
+//     marginTop: 30, 
+//     marginBottom: 20, 
+//     paddingTop: 30,
+//     borderColor: 'red',
+//     display: 'block'
+//   }
+// })
+
+const Button = styled.button`
+  background-color: #1ed760; 
+
+  width: 20%;
+  border-radius: 10px;
+  padding: 2rem;
+  border: none; 
+  height: auto;
+  margin: 2rem;
+`
 
 //auth
 const CLIENT_ID = process.env.REACT_APP_API_KEY
@@ -29,6 +53,8 @@ const SpotifyAuthParams = (hash) => {
 };
 
 const App = () => {
+
+  // const classes = useStyles()
   
   const [accessToken, setAccessToken] = useState("") //access token
   const [searchInput, setSearchInput] = useState("") //user playlist
@@ -119,7 +145,7 @@ const App = () => {
 
     const tracksParams = {
       method: 'POST',
-      headers:  header(accessToken),
+      headers:  header(accessToken), 
       body: JSON.stringify({
         uris: songURI
       })
@@ -130,7 +156,17 @@ const App = () => {
 
   return (
     <div className="App">
-      <Container
+      <form noValidate autoComplete="off">
+        <label>
+          Enter Playlist URL
+          <input type="text" name="name" />
+        </label>
+        <Button>
+         Submit
+        </Button>
+        </form>
+
+      {/* <Container
         style={{backgroundColor: 'linear-gradient(120deg, #1DB954, #191414)'}}
       >
       
@@ -194,7 +230,7 @@ const App = () => {
             })}
 
         </List>
-      </Container>
+      </Container> */}
     </div>
   )
 }
