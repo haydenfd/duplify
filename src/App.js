@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './App.css'
 import { Container, Button, TextField, List, ListItem, ListItemText } from '@mui/material';
 
@@ -6,9 +6,13 @@ import { Container, Button, TextField, List, ListItem, ListItemText } from '@mui
 const CLIENT_ID = process.env.REACT_APP_API_KEY
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const REDIRECT_URI = "http://localhost:3000"
-const SCOPES = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private"]
-const SCOPES_PARAM = SCOPES.join("%20");
-
+const SCOPES_PARAM = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private"].join("%20")
+const header = (token) => {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`  
+  }
+}
 
 //get access token
 const SpotifyAuthParams = (hash) => {
@@ -31,13 +35,11 @@ const App = () => {
   const [songs, setSongs] = useState([]) //songs from to-be-dup playlist
   const [userID, setUserID] = useState("") //user ID to create new playlist
   const [playlistName, setPlaylistName] = useState("")
-  const [playlist, setPlaylist] = useState({})
 
   //get the access token, put into local storage
   useEffect(() => {
     if (window.location.hash) {
-      const { access_token, expires_in, token_type } =
-        SpotifyAuthParams(window.location.hash);
+      const { access_token, expires_in, token_type } = SpotifyAuthParams(window.location.hash);
       setAccessToken(access_token)
 
       localStorage.clear();
@@ -45,30 +47,33 @@ const App = () => {
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("tokenType", token_type);
       localStorage.setItem("expiresIn", expires_in);
+
     }
   }, []);
+
 
   //redirect to spotify auth page
   const handleLogin = () => {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_PARAM}&response_type=token&show_dialog=true`;
   };
 
-  //get user profile info
-  async function retrieveUser() { 
 
-    var searchParams = {
+  //get user profile id
+  async function retrieveUserID() { 
+
+    let userParams = {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken 
-      }
+      headers: header(accessToken)
     }
     
-    const userObject = await fetch('https://api.spotify.com/v1/me/', searchParams)
-      .then(response => response.json()).then(data => { return data })
+    const user = await fetch('https://api.spotify.com/v1/me/', userParams)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.id)
+        return data
+      })
   
-    setUserID(userObject.id)
-    console.log(userID)
+    setUserID(user.id)
   }
 
   //pull up the playlist to be duplicated
@@ -76,76 +81,52 @@ const App = () => {
   
     const endpoint = `https://api.spotify.com/v1/playlists/${id}`
 
-    var params = {
+    var playlistParams = {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
-      }
+      headers: header(accessToken)
     }
 
-    var playlistObject = await fetch(endpoint, params)
-      .then(response => response.json()).then(data =>
+    var playlist = await fetch(endpoint, playlistParams)
+      .then(response => response.json())
+      .then(data =>
       {
+        console.log(data)
         return data
       })
 
-      setSongs(playlistObject.tracks.items)
-      console.log(songs)
+      setSongs(playlist.tracks.items)
   }
 
-  async function createPlaylist(name) { 
+  const createAndPopulatePlaylist = useCallback(async () => {
 
-    const endpoint = `https://api.spotify.com/v1/users/${userID}/playlists`
-
-    var params = {
+    const playlistsEndpoint = `https://api.spotify.com/v1/users/${userID}/playlists`;
+    const playlistsParams = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
-      },
+      headers: header(accessToken),
       body: JSON.stringify({
-        name: name,
+        name: playlistName,
         description: "New playlist description",
         public: false
       })
-    }
+    };
 
-    var playlistObject = await fetch(endpoint, params)
-      .then(response => response.json()).then(data => {
-        setPlaylist(data)
-      })
-  
-  }
+    let playlistObject = await fetch(playlistsEndpoint, playlistsParams);
+    playlistObject = await playlistObject.json();
+    const { id } = playlistObject;
 
-//max 100 can be added in one request
-  async function addSongs() { 
+    const tracksEndpoint = `https://api.spotify.com/v1/playlists/${id}/tracks`;
+    const songURI = songs.map(song => song.track.uri);
 
-    const endpoint = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`
-
-    const songURI = []
-
-    songs.forEach(song => songURI.push(song.track.uri))
-    console.log(songURI)
-
-    var params = {
+    const tracksParams = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
-      },
+      headers:  header(accessToken),
       body: JSON.stringify({
         uris: songURI
       })
-    }
+    };
 
-    var songsObject = await fetch(endpoint, params)
-      .then(response => response.json()).then(data => {
-        return data
-      })
-
-    console.log(songsObject)
-  }
+    await fetch(tracksEndpoint, tracksParams);
+  }, [userID, accessToken, playlistName, songs]);
 
   return (
     <div className="App">
@@ -181,7 +162,7 @@ const App = () => {
           size="large"
 
           onClick={() => {
-            retrieveUser()
+            retrieveUserID()
             getPlaylist(searchInput.substring(34, 56))
           }}
         >
@@ -198,12 +179,7 @@ const App = () => {
               fontFamily: "sans-serif"
             }}
             size="large"
-
-            onClick={() => {
-              createPlaylist(playlistName)
-              addSongs()
-
-            }}
+            onClick={createAndPopulatePlaylist}
           >
             Create new playlist
           </Button>
@@ -211,7 +187,7 @@ const App = () => {
             songs.map((song, i) => {
 
               return (
-                <ListItem>
+                <ListItem key={i}>
                   <ListItemText primary={`${song.track.name}`}/>
                 </ListItem>
               )
