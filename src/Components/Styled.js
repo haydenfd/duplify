@@ -32,7 +32,7 @@ const Button = styled.button`
 const Input = styled.input`
   flex: 8;
   padding: 0.75em 0.75em;
-  margin-right: 3em;
+  margin-right: 1.5em;
   border: 0.25em solid black;
   border-radius: 3rem;
  
@@ -63,9 +63,25 @@ const Form = styled.div`
   margin-top: 7em;
   `
 
+// const Title = styled.h1`
+//   font-size: 8em;
+//   color: #1ed760;
+//   margin-top:2.5em;
+//   padding-right: 10rem;
+// `
+
+// const SubTitle = styled.h2`
+//   font-size: 5em;
+//   color: #1ed760;
+//   margin-top:1em;
+//   padding-right: 10rem;
+// `
+
 export {
   Button,
   Input,
   Status,
   Form,
+  // Title, 
+  // SubTitle,
 }

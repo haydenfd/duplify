@@ -7,6 +7,8 @@ import {
   Input,
   Status,
   Form,
+  // Title, 
+  // SubTitle
 } from './Styled';
 
 const header = (token) => {
@@ -115,10 +117,11 @@ const Home = (props) => {
   
   return (
     <div className="App">
-      {isClippyTimeout.toString()}
       <Status>
         <h1>Signed in: {user.display_name}</h1>
       </Status>
+      <h1 className='title'>DUPLIFY</h1>
+      <h2 className='subtitle'>Customize existing playlists</h2>
       <Form>
         <Input
           type="text"
