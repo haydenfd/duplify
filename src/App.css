@@ -23,23 +23,6 @@
 }
 
 
-.form {
-  display: flex; 
-  flex-direction: row;
-  /* grid-column: 2; */
-  width: 75%;
-  padding: 3rem;
-  margin-top: 7em;
-}
-
-
-.input {
-  flex: 8;
-  padding: 0.5em 0.75em;
-  margin-right: 3em;
-  border-radius: 1em;
-  border: none;
-}
 
 .grid {
   width: 75%;
