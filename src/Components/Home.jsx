@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import '../App.css'
 import styled from "styled-components"
 import { Card, CardMedia, CardContent } from '@mui/material'
+
 import {
   Button,
   Input,
@@ -18,13 +19,7 @@ const header = (token) => {
   }
 }
 
-const Home = (props) => {
-  const {
-    setCurrentRoute
-  } = props;
-
-
-  // const classes = useStyles()
+const Home = () => {
 
   const [accessToken, setAccessToken] = useState("") //access token
   const [playlistURL, setPlaylistURL] = useState("")
@@ -33,6 +28,21 @@ const Home = (props) => {
   const [playlistName, setPlaylistName] = useState("")
   const [user, setUser] = useState({})
   const [isClippyTimeout, setIsClippyTimeout] = useState(false);
+
+  //get user profile id
+  async function getUser() {
+
+    let userParams = {
+      method: 'GET',
+      headers: header(localStorage.getItem("accessToken"))
+    }
+
+    let user = await fetch('https://api.spotify.com/v1/me/', userParams)
+    user = await user.json();
+      
+    setUser(user);
+    console.log(user);
+  }
 
   //pull up the playlist to be duplicated
   const getPlaylist = useCallback(async (url) => {
@@ -61,13 +71,9 @@ const Home = (props) => {
   }, [accessToken, songs]);
 
   useEffect(() => {
+    getUser();
     window.addEventListener('focus', async (event) => {
-      // if (isClippyTimeout) return
-      // setIsClippyTimeout(true);
-      // setTimeout(() => {
-      //   setIsClippyTimeout(false);
-      // }, 3000);
-      console.log("There was an attempt.")
+ 
       try {
         const clippy = await navigator.clipboard.readText()
         if (/https:\/\/open.spotify.com\/playlist\/.*/.test(clippy)) {
@@ -118,7 +124,10 @@ const Home = (props) => {
   return (
     <div className="App">
       <Status>
-        <h1>Signed in: {user.display_name}</h1>
+        {user.display_name ?
+          <h1>{user.display_name}</h1> : 
+          <h1>Loading</h1>
+        }
       </Status>
       <h1 className='title'>DUPLIFY</h1>
       <h2 className='subtitle'>Customize existing playlists</h2>

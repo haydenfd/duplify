@@ -1,33 +1,64 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import './App.css'
 import styled from "styled-components"
 import { Card, CardMedia, CardContent } from '@mui/material'
 import Login from "./Components/Login";
 import Home from "./Components/Home";
+import Redirect from "./Components/Redirect"
+
+
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const [currentRoute, setCurrentRoute] = useState("pending");
+  const [currentRoute, setCurrentRoute] = useState("");
+  
+  const updateRoute = (newRoute) => {
+    //window.location = newRoute;
+    window.history.pushState({}, "", newRoute)
+    setCurrentRoute(newRoute);
+  }
 
-  useEffect(() => {
-    // check for afterAuth, if it's there then set route to login
-    if (localStorage.getItem("accessToken") === null) {
-      setCurrentRoute("login")
-    } else {
-      setCurrentRoute("home")
+  const routeMap = {
+    login: {
+      protected: false,
+      component: < Login setCurrentRoute={updateRoute} />,
+    },
+    home: {
+      protected: true,
+      component: < Home setCurrentRoute={updateRoute} />,
+    },
+    redirect: {
+      protected: false,
+      component: < Redirect setCurrentRoute={updateRoute} />,
+    },
+    dne: {
+      protected: false,
+      component: <div style={{ color: "white", textAlign: "center" }}> 404!</div>
     }
-  }, [])
+  };
+
+  const routedComponent = useMemo(() => {
+    const path = window.location.pathname.slice(1);
+    if (path in routeMap) {
+        if (routeMap[path].protected && localStorage.getItem("accessToken") === null) {
+          updateRoute("login")
+          return <></>;
+        } else {
+          return routeMap[path].component;
+        }
+    } else {
+      updateRoute("home")
+      return false;
+    }
+  }, [currentRoute])
+
+  
 
   return (
     <>
-      {currentRoute === "login" && <Login setCurrentRoute={setCurrentRoute} />}
-      {currentRoute === "home" && <Home setCurrentRoute={setCurrentRoute} />}
-      {currentRoute === "pending" &&
-        <div>
-          ...
-        </div>
-      }
+      {routedComponent}
     </>
-  )
+  );
 }
 
 export default App
