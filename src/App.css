@@ -37,3 +37,65 @@
   color: white;
   margin-top:0.5em;
 }
+
+/* SongCard */
+
+.songcard-container {
+  width: 90%;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom:1em;
+  font-size: 0.6em;
+  padding: 1.2em;
+}
+
+.selected-container {
+  border: 0.5em #1ed760 solid;
+  background-color: #1ed760;
+}
+
+.not-selected-container {
+  border: 0.5em  #c40233 solid;
+  background-color: #c40233;
+
+}
+
+.img-container {
+  flex-basis: 1;
+  background-color: aqua;
+}
+
+.song-artist-container {
+  flex-basis: 1.5;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.song-artist-subcontainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  flex-grow: 1;
+  margin-left: 0;
+}
+
+
+.duration-container {
+  flex-basis: 1;
+  flex-grow: 0.5;
+}
+
+.plus-minus-container {
+  flex-basis: 0.5;
+  flex-grow: 0.5;
+  font-size: 2.5rem;
+}
+
+.song-title {
+}
+
+.song-artist {
+  font-size: smaller;
+}

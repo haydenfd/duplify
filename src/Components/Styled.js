@@ -33,7 +33,7 @@ const Input = styled.input`
   flex: 8;
   padding: 0.75em 0.75em;
   margin-right: 1.5em;
-  border: 0.25em solid black;
+  border: 0.25em solid #191914;
   border-radius: 3rem;
  
 
@@ -45,13 +45,13 @@ const Input = styled.input`
   `
 
 const Status = styled.div`
-  position: absolute; 
-  top: 0; 
-  right: 12vw;
+  position:absolute;
+  display: flex;
+  top:0;
+  right:0;
   background-color: #1ed760;
-  padding: 0.75em;
+  padding: 1vw;
   border-left: 0.25em solid black;
-  border-right: 0.25em solid black;
   border-bottom: 0.25em solid black;`
 
 const Form = styled.div`

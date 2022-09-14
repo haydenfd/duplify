@@ -29,7 +29,7 @@ const App = () => {
     },
     redirect: {
       protected: false,
-      component: < Redirect setCurrentRoute={updateRoute} />,
+      component: <Redirect setCurrentRoute={updateRoute} />,
     },
     dne: {
       protected: false,

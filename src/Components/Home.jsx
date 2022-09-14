@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import '../App.css'
-import styled from "styled-components"
-import { Card, CardMedia, CardContent } from '@mui/material'
+import { Avatar } from '@mui/material'
+import SongCard from './SongCard';
 
 import {
   Button,
   Input,
   Status,
   Form,
-  // Title, 
-  // SubTitle
 } from './Styled';
 
 const header = (token) => {
@@ -28,6 +26,7 @@ const Home = () => {
   const [playlistName, setPlaylistName] = useState("")
   const [user, setUser] = useState({})
   const [isClippyTimeout, setIsClippyTimeout] = useState(false);
+  const [userURL, setUserURL] = useState('/broken.jpg');
 
   //get user profile id
   async function getUser() {
@@ -41,6 +40,10 @@ const Home = () => {
     user = await user.json();
       
     setUser(user);
+    if (user.images.length !== 0)
+    {
+      setUserURL(user.images[0].url)  
+    }
     console.log(user);
   }
 
@@ -48,12 +51,11 @@ const Home = () => {
   const getPlaylist = useCallback(async (url) => {
 
     const id = url.substring(34, 56)
-    console.log(id)
     const endpoint = `https://api.spotify.com/v1/playlists/${id}`
 
     const playlistParams = {
       method: 'GET',
-      headers: header(accessToken)
+      headers: header(localStorage.getItem("accessToken"))
     }
 
     const playlist = await fetch(endpoint, playlistParams)
@@ -65,20 +67,20 @@ const Home = () => {
 
     setPlaylist(playlist)
     setSongs(playlist.tracks.items)
-    console.log(Object.keys(songs[0]))
     console.log(Object.keys(songs[0].track))
     console.log(songs[0].track)
   }, [accessToken, songs]);
+
 
   useEffect(() => {
     getUser();
     window.addEventListener('focus', async (event) => {
  
       try {
-        const clippy = await navigator.clipboard.readText()
-        if (/https:\/\/open.spotify.com\/playlist\/.*/.test(clippy)) {
-          console.log(`Pasted ${clippy}`)
-          getPlaylist(clippy);
+        const clipboardText = await navigator.clipboard.readText()
+        if (/https:\/\/open.spotify.com\/playlist\/.*/.test(clipboardText)) {
+          setPlaylistURL(clipboardText)
+          getPlaylist(clipboardText);
         }
       } catch (err) {
         
@@ -86,44 +88,49 @@ const Home = () => {
     });
   }, [getPlaylist]);
 
+  const createAndPopulatePlaylist = useCallback(async () => {
 
+    const playlistsEndpoint = `https://api.spotify.com/v1/users/${user}/playlists`;
+    const playlistsParams = {
+      method: 'POST',
+      headers: header(accessToken),
+      body: JSON.stringify({
+        name: playlistName,
+        description: "New playlist description",
+        public: false
+      })
+    };
 
+    let playlistObject = await fetch(playlistsEndpoint, playlistsParams);
+    playlistObject = await playlistObject.json();
+    const { id } = playlistObject;
 
-  // const createAndPopulatePlaylist = useCallback(async () => {
+    const tracksEndpoint = `https://api.spotify.com/v1/playlists/${id}/tracks`;
+    const songURI = songs.map(song => song.track.uri);
 
-  //   const playlistsEndpoint = `https://api.spotify.com/v1/users/${user}/playlists`;
-  //   const playlistsParams = {
-  //     method: 'POST',
-  //     headers: header(accessToken),
-  //     body: JSON.stringify({
-  //       name: playlistName,
-  //       description: "New playlist description",
-  //       public: false
-  //     })
-  //   };
+    const tracksParams = {
+      method: 'POST',
+      headers:  header(accessToken),
+      body: JSON.stringify({
+        uris: songURI
+      })
+    };
 
-  //   let playlistObject = await fetch(playlistsEndpoint, playlistsParams);
-  //   playlistObject = await playlistObject.json();
-  //   const { id } = playlistObject;
-
-  //   const tracksEndpoint = `https://api.spotify.com/v1/playlists/${id}/tracks`;
-  //   const songURI = songs.map(song => song.track.uri);
-
-  //   const tracksParams = {
-  //     method: 'POST',
-  //     headers:  header(accessToken),
-  //     body: JSON.stringify({
-  //       uris: songURI
-  //     })
-  //   };
-
-  //   await fetch(tracksEndpoint, tracksParams);
-  // }, [user, accessToken, playlistName, songs]);
+    await fetch(tracksEndpoint, tracksParams);
+  }, [user, accessToken, playlistName, songs]);
 
   
   return (
     <div className="App">
       <Status>
+        <Avatar
+          src= {userURL}
+          alt=""
+          sx={{ height: 56, width: 56 }}
+          style={{
+            marginRight: '1vw'
+          }}
+        />
         {user.display_name ?
           <h1>{user.display_name}</h1> : 
           <h1>Loading</h1>
@@ -149,28 +156,35 @@ const Home = () => {
         {
           songs.map((song, i) => {
             return (
-              <Card
-                variant="outlined"
-                style={{
-                  borderColor: '#1ed760',
-                  backgroundColor: 'grey',
-                  padding: '0.5rem 0rem',
-                  marginBottom: '2rem'
-                }}>
-                {i}
-                <CardMedia component="img"
-                  image={song.track.album.images[1].url}
-                  style={{
-                    maxWidth: '5%',
-                    maxHeight: '5%',
-                    float: 'left',
-                    marginLeft: '1em'
-                  }}
-                />
-                <CardContent>
-                  {song.track.name} ; {song.track.artists[0].name} ;
-                </CardContent>
-              </Card>
+              <SongCard
+                num={i}
+                img={song.track.album.images[2].url}
+                title={song.track.name}
+                artist={song.track.artists[0].name}
+                length={song.track.duration_ms}
+              />
+              // <Card
+              //   variant="outlined"
+              //   style={{
+              //     borderColor: '#1ed760',
+              //     backgroundColor: 'grey',
+              //     padding: '0.5rem 0rem',
+              //     marginBottom: '2rem'
+              //   }}>
+              //   {i}
+              //   <CardMedia component="img"
+              //     image={song.track.album.images[1].url}
+              //     style={{
+              //       maxWidth: '5%',
+              //       maxHeight: '5%',
+              //       float: 'left',
+              //       marginLeft: '1em'
+              //     }}
+              //   />
+              //   <CardContent>
+              //     {song.track.name} ; {song.track.artists[0].name} ;
+              //   </CardContent>
+              // </Card>
             )
           })
         }
