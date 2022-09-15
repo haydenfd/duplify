@@ -6,7 +6,7 @@ const Button = styled.button`
   width: auto;
   border-radius: 10px;
   border: none; 
-  height: auto;  
+  max-height: auto;  
   padding: 0.7em 0.75em;
   flex: 1;
   margin-right: 0.5em;
@@ -77,11 +77,17 @@ const Form = styled.div`
 //   padding-right: 10rem;
 // `
 
+let nextId = 0;
+const generateID = () => {
+  const result = nextId;
+  nextId += 1;
+  return result;
+}
+
 export {
   Button,
   Input,
   Status,
   Form,
-  // Title, 
-  // SubTitle,
+  generateID
 }

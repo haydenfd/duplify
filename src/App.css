@@ -3,7 +3,48 @@
   font-size: 1rem;
 }
 
-.container{
+/* Home.jsx */
+
+.flex-container {
+    display: flex;
+    height: 100%;
+    
+}
+
+.flex-child {
+    flex: 1;
+    border-radius: 1rem;
+    flex-grow: 1;
+}  
+
+.black {
+  background-color: #545454;
+}
+
+.green {
+  background-color: #1ed760;
+}
+
+.landing-container {
+  display:flex;
+  width: 100%;
+  flex-direction:row;
+}
+
+.green-container {
+  flex: 1;
+  background-color: #1ed760;
+}
+
+.black-container {
+  flex: 1;
+  background-color: #191914;
+}
+/* */
+
+
+
+.container {
  	margin: auto;
   width: 100%;
   margin-top: 5rem;
@@ -20,6 +61,7 @@
   margin-left: 1.5rem !important;
   width: 10%;
   padding: 1.5rem !important;
+  max-height: 1rem;
 }
 
 .grid {
@@ -41,14 +83,16 @@
 /* SongCard */
 
 .songcard-container {
-  width: 90%;
+
+  width: 100%;
   color: white;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   margin-bottom:1em;
   font-size: 0.6em;
-  padding: 1.2em;
+  padding-top: 0.5em;
+  transition-duration: 0.5s;
 }
 
 .selected-container {
@@ -64,38 +108,55 @@
 
 .img-container {
   flex-basis: 1;
-  background-color: aqua;
 }
 
 .song-artist-container {
-  flex-basis: 1.5;
   flex-grow: 1;
-  justify-content: flex-start;
+  display: flex;
+  padding-left: 2em;
 }
 
 .song-artist-subcontainer {
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
-  flex-grow: 1;
   margin-left: 0;
 }
 
 
 .duration-container {
-  flex-basis: 1;
   flex-grow: 0.5;
+  font-size: 1.5rem;
 }
 
 .plus-minus-container {
-  flex-basis: 0.5;
   flex-grow: 0.5;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
-.song-title {
+
+.song-artist, .song-title {
+  font-weight: bold;
 }
 
-.song-artist {
-  font-size: smaller;
+.song-artist{
+  font-size: 0.8em;
+  padding-left: 0.1em;
+}
+
+.minus-button, .plus-button {
+  transition-duration: 3s;
+}
+
+.right-float {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-float {
+    width: 67%;
+    display: flex;
+    flex-direction: row;
 }

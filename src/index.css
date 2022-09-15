@@ -9,8 +9,8 @@
     box-sizing: inherit;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
-    margin: auto;
     padding:auto;
+    margin: auto;
 }
 
 html {
@@ -23,4 +23,5 @@ body {
     line-height: 1.6;
     /* background-color: #191414; */
     background-color: #191414;
+
 }

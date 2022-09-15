@@ -26,11 +26,27 @@ const Login = (props) => {
   const { setCurrentRoute } = props;
 
   return (
-    <div className="App">
-      <Button onClick={() => handleLogin()}>
-        Login
-      </Button>
-    </div>
+    
+    //   <div className="black-container">
+
+    //   </div>
+    //   <div className="green-container">
+      
+    //   </div>
+    // </div>
+    <div class="flex-container">
+
+  <div class="flex-child black">
+    <Button onClick={() => handleLogin()}>
+      Login
+    </Button>
+  </div>
+  
+  <div class="flex-child green">
+    Flex Column 2
+  </div>
+  
+</div>
   )
 }
 

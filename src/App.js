@@ -6,14 +6,10 @@ import Login from "./Components/Login";
 import Home from "./Components/Home";
 import Redirect from "./Components/Redirect"
 
-
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 const App = () => {
   const [currentRoute, setCurrentRoute] = useState("");
   
   const updateRoute = (newRoute) => {
-    //window.location = newRoute;
     window.history.pushState({}, "", newRoute)
     setCurrentRoute(newRoute);
   }

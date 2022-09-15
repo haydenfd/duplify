@@ -44,7 +44,7 @@ const Redirect = (props) => {
         style={{
           color: "white"
         }}
-      >Loading bitch</h1>
+      >Couldn't authenticate :(</h1>
     </div>
   )
 }
