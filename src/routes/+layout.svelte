@@ -1,6 +1,6 @@
 
 <slot />
-
+<!-- 
 <footer>
     <p>Made with &#10084;&#65039 by Hayden D'Souza</p>
 </footer>
@@ -22,4 +22,4 @@
     }
 
 
-</style>
+</style> -->

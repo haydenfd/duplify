@@ -5,7 +5,7 @@
 <Nav />
 <div>
     <h1>About Duplify</h1>
-    <p>A few months ago, my friend came to me with a problem: </p>
+    <p>Insert boilerplate explanation of app and how to use it</p>
 </div>
 
 <style>

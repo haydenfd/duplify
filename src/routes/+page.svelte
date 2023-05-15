@@ -1,6 +1,5 @@
 <script>
     import { accessToken } from '../utils/store';
-    import { redirect } from '@sveltejs/kit';
     import { browser } from '$app/environment'
 
 

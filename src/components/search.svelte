@@ -61,7 +61,7 @@
 
     input[type="text"] {
         padding: 16px;
-        border: 3px solid #4A4A4A;
+        border: 4.5px solid #4A4A4A;
         outline: none;
         border-radius: 8px;
         font-size: 16px;
@@ -71,12 +71,12 @@
     }
 
     input[type="text"]:focus {
-        border: 3px solid rgb(176, 55, 182);
+        border: 4.5px solid rgb(176, 55, 182);
     }
 
     button {
         width: 20%;
-        padding: 18px;
+        padding: 19px;
         background-color: #1DB954;
         border: none;
         outline: none;
@@ -84,6 +84,7 @@
         font-weight: 600;
         font-size: 20px;
         border-radius: 8px;
+        transition: all 0.28s ease-in-out;
         cursor: pointer;
     }
 
@@ -98,6 +99,8 @@
     .user-display-name {
         display: inline;
         color:#1DB954;
+        transition: all 0.28s ease-in-out;
+
     }
 
     .user-display-name:hover {
