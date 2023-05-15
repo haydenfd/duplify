@@ -17,6 +17,7 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.0.0-next.106",
+		"dotenv": "^16.0.3",
 		"npm": "^9.6.6"
 	}
 }
