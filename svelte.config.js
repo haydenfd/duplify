@@ -11,13 +11,21 @@
 // };
 
 // export default config;
-import node from '@sveltejs/adapter-node';
+// import node from '@sveltejs/adapter-node';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	kit: {
-		adapter: node(),
-	}
+// /** @type {import('@sveltejs/kit').Config} */
+// const config = {
+// 	kit: {
+// 		adapter: node(),
+// 	}
+// };
+
+// export default config;
+
+import adapter from '@sveltejs/adapter-node';
+
+export default {
+    kit: {
+        adapter: adapter()
+    }
 };
-
-export default config;

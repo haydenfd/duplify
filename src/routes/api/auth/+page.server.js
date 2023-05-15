@@ -1,7 +1,8 @@
 import { redirect } from '@sveltejs/kit';
-// import { VITE_CLIENT_ID, VITE_REDIRECT_URI} from '$env/static/private';
 import {ENDPOINTS} from '../../../utils/spotify_endpoints';
 import {generateRandomString} from '../../../utils/misc'; 
+import dotenv from 'dotenv';
+dotenv.config();
 
 const RESPONSE_TYPE='code';
 const STATE=generateRandomString();
@@ -15,6 +16,8 @@ const SCOPE=[
 
 // 307 is temp redirect 
 export function load() {
-    const AUTH_ENDPOINT = `${ENDPOINTS.oauthAuthorizationURL}?response_type=${RESPONSE_TYPE}&state=${STATE}&client_id=${import.meta.env.VITE_CLIENT_ID}&scope=${SCOPE}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}`
+    const id = process.env['CLIENT_ID']
+    const redirect_uri = process.env['REDIRECT_URI']
+    const AUTH_ENDPOINT = `${ENDPOINTS.oauthAuthorizationURL}?response_type=${RESPONSE_TYPE}&state=${STATE}&client_id=${id}&scope=${SCOPE}&redirect_uri=${redirect_uri}`
     throw redirect(307, AUTH_ENDPOINT)
 }
