@@ -9,9 +9,9 @@
     About this playlist
 </h1>
 
-<h2>{$playlist.name}</h2>
-<h2>{$playlist.owner.display_name}</h2>
-<h2>{$playlist.tracks.items.length} songs</h2>
+<h2>Playlist name: {$playlist.name}</h2>
+<h2>Playlist owner: {$playlist.owner.display_name}</h2>
+<h2>Playlist length: {$playlist.tracks.items.length} songs</h2>
 
 
 <style>

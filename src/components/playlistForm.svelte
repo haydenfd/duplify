@@ -9,7 +9,6 @@
         'Public',
     ];
 
-
     const submitForm = async () => {
         const token = $accessToken
         const user_id = $user["id"]
@@ -17,7 +16,7 @@
         const response = await fetch(`/api/playlist?name=${newPlaylistName}&scope=${newPlaylistScope}&desc=${newPlaylistDescription}&user=${user_id}&token=${token}&uri=${arr}`, 
         {
             method: 'POST'
-        })
+        }).then(data => data.json()).then(() => alert('Playlist created successfully! Reload your Spotify app.'))
     }
 </script>
 

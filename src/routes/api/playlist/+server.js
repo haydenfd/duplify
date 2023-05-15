@@ -74,7 +74,7 @@ export async function POST({url}) {
         _addSongs(new_playlist_id, uri, token)
     })
 
-    return json({"1": true})
+    return json({"status":"200"})
 }
 
 export async function _addSongs(playlist_id, songs_arr, token) 

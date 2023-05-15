@@ -1,1 +1,1 @@
-Currently trying to deploy the website to www.duplify.live
+Currently trying to deploy this repo to www.duplify.live
