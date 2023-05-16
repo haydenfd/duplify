@@ -1,8 +1,5 @@
 <script>
     import { playlist } from "../utils/store";
-    console.log($playlist);
-
-  
 </script>
 
 <h1 class="about-title">

@@ -1,4 +1,3 @@
-// import { VITE_CLIENT_ID, VITE_REDIRECT_URI, VITE_CLIENT_SECRET} from '$env/static/private';
 import { json } from '@sveltejs/kit'
 import {ENDPOINTS} from '../../../utils/spotify_endpoints';
 import dotenv from 'dotenv';
@@ -11,7 +10,6 @@ const HEADERS = {
 
 
 /** @type {import('./$types').RequestHandler} */
-
 export async function POST({url}) {
 
     const code = url.search.substring(1)
