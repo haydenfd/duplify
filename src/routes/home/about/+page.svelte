@@ -2,7 +2,11 @@
     import Nav from "../../../components/nav.svelte";
     import { onMount } from "svelte";
     import { fly } from "svelte/transition";
-    let visible = true;
+    let visible = false;
+
+    onMount(() => {
+    visible = true;
+  });
 </script>
 
 {#if visible}
