@@ -38,33 +38,22 @@
 </script>
 
 
-
-
-
-<!-- 
 <nav>
-    <button on:click|preventDefault={handleHomeRedirect}>Duplify</button>
-    <button on:click|preventDefault={handleGuideRedirect}>How do I use this?</button>
-    <button on:click|preventDefault={handleAboutRedirect}>What's this about?</button>
-    <button on:click|preventDefault={handleLogout}>Logout</button>
-</nav> -->
-
-
-<nav>
-        <h1>Duplify</h1>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <h1 on:click|preventDefault={handleHomeRedirect}>Duplify</h1>
         <ul>
             <li>
-                <a href="/">
+                <a href="/" data-sveltekit-preload-data="tap">
                     Home
                 </a>
             </li>
             <li>
-                <a href="/home/guide">
+                <a href="/home/guide" data-sveltekit-preload-data="tap">
                     Guide
                 </a>
             </li>
             <li>
-                <a href="/home/about">
+                <a href="/home/about" data-sveltekit-preload-data="tap">
                     About
                 </a>
             </li>
@@ -116,6 +105,12 @@
         padding: 15px;
         margin-top: 10px;
         height: 100%;
+        cursor: pointer;
+    }
+
+    h1:hover {
+        transition: all 0.28s ease-in-out;
+        color: #B037B6;
     }
     a {
         text-decoration: none;
@@ -127,28 +122,4 @@
         background-color: #B037B6;
     }
 
-    /* nav {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-around;
-        background-color: #1DB954;
-        padding: 14px;
-    }
-
-    button {
-        background-color: transparent;
-        border: 2px solid transparent;
-        font-size: 26px;
-        color: white;
-        font-weight: 600;
-        font-family: 'Montserrat';
-        padding:10px;
-        cursor: pointer;
-        transition: all 0.28s ease-in-out;
-    }
-
-    button:hover {
-        background-color: rgb(176,55,182);
-        border: 2px solid rgb(176,55,182);
-    } */
 </style>

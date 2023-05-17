@@ -43,8 +43,8 @@
 <style>
 
     .title {
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         width: 80%;
         text-align: center;
         display: flex;
@@ -71,13 +71,14 @@
     }
 
     input[type="text"] {
-        padding: 14px;
+        padding: 12px;
         border: 4.5px solid #4A4A4A;
         outline: none;
         border-radius: 8px;
         width: 60%;
         font-weight: 600;
         font-size: 18px;
+        font-family: 'Montserrat', sans-serif;
     }
 
     input[type="text"]:focus {
@@ -86,16 +87,17 @@
 
     button {
         width: 20%;
-        padding: 18px;
+        padding: 15px;
         background-color: #1DB954;
         border: none;
         outline: none;
         color: white;
         font-weight: 600;
         font-size: 18px;
-        border-radius: 8px;
+        border-radius: 7px;
         transition: all 0.28s ease-in-out;
         cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
     }
 
     button:hover {
