@@ -5,10 +5,13 @@
     import PlaylistLayout from "./playlistLayout.svelte";
     import { playlist } from "../utils/store";
     import { onMount } from "svelte";
+    import { slide } from "svelte/transition";
+    let visible = false;
 
     onMount(() => 
         {
             lastSearchedId = id;
+            visible = true;
         })
 
     export const fetchPlaylist = async () => 
@@ -38,18 +41,19 @@
             lastSearchedId = id
             fetchPlaylist()
         }
-        else {
-            alert('Lmao')
-        }
     }
 
 </script>
 
 
-{#if Object.keys($playlist).length === 0}
+{#if Object.keys($playlist).length === 0 }
     <div></div>
     {:else}
-    <PlaylistLayout>
-        
-    </PlaylistLayout>
+    {#if visible}
+    <div transition:slide>
+        <PlaylistLayout>
+            
+        </PlaylistLayout>
+    </div>
+        {/if}
 {/if}
