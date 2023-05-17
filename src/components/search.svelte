@@ -4,7 +4,9 @@
     export let urlSearchInput = '';
     export let playlistID = ''; 
     import FetchPlaylist from "./fetchPlaylist.svelte";
+    import { fade, fly } from 'svelte/transition';
     let visible = false;
+    let name = ''
 
     export const fetchUser = async () => 
     {
@@ -12,6 +14,7 @@
 
         $user = await fetch(`api/me?token=${accessToken}`)
         .then((response) => response.json())
+        name = $user.display_name
         console.log($user)
     }
 
@@ -31,7 +34,6 @@
         }
 
         else {
-            // document.getElementById("input-url").classList.add('error-input');
             alert('Oops, that link is invalid. Try again with a different link, or visit the guide for help.')
         }
     }
@@ -39,12 +41,12 @@
 </script>
 
 {#if visible}
-<div class="title">
-    <h1>Hey <h1 class="user-display-name">{$user.display_name}
+<div class="title" in:fly="{{ y: -200, duration: 2200 }}" out:fade="{{delay: 500,duration: 800}}">
+    <h1>Hey <h1 class="user-display-name">{name}
     </h1>, what playlists do you want to clone today?</h1>
 </div>
 
-<div class="form-container">
+<div class="form-container" in:fly="{{ y: -200, duration: 2200, delay: 800}}" out:fade="{{delay: 200,duration: 1000}}">
     <input type="text" placeholder="Enter Playlist URL" bind:value={urlSearchInput} id="input-url">
     <button on:click|preventDefault = {() => parseUrlForPlaylistId(urlSearchInput)}>Retrieve Playlist</button>
 </div>

@@ -9,7 +9,6 @@
             window.sessionStorage.setItem('accessToken', null);
             window.location.href='/login'
         }
-        
     }
 
     export const handleAboutRedirect = () => 
