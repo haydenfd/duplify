@@ -43,17 +43,17 @@
         <h1 on:click|preventDefault={handleHomeRedirect}>Duplify</h1>
         <ul>
             <li>
-                <a href="/" data-sveltekit-preload-data="tap">
+                <a href="/">
                     Home
                 </a>
             </li>
             <li>
-                <a href="/home/guide" data-sveltekit-preload-data="tap">
+                <a href="/home/guide">
                     Guide
                 </a>
             </li>
             <li>
-                <a href="/home/about" data-sveltekit-preload-data="tap">
+                <a href="/home/about">
                     About
                 </a>
             </li>

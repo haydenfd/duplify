@@ -1,7 +1,8 @@
 <script>
-
+    import Nav from "../../../components/nav.svelte";
 </script>
 
+<Nav></Nav>
 <div>
     <h1>Guide</h1>
     <p>step 1</p>

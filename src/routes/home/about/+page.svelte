@@ -1,7 +1,7 @@
 <script>
     import Nav from "../../../components/nav.svelte";
     import { onMount } from "svelte";
-    import { fly } from "svelte/transition";
+    // import { fly } from "svelte/transition";
     let visible = false;
 
     //helps spam?
@@ -30,7 +30,7 @@
 
 {#if visible}
 <Nav />
-<div transition:fly="{{ y: -200, duration: 1500 }}">
+<div>
     <h1>About Duplify</h1>
     <p>
         Inserting explanation soon.

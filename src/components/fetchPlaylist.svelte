@@ -1,13 +1,19 @@
 <script>
     export let id = '';
-
+    let lastSearchedId = '';
     import { accessToken, songs_uri_arr } from "../utils/store";
     import PlaylistLayout from "./playlistLayout.svelte";
     import { playlist } from "../utils/store";
+    import { onMount } from "svelte";
 
-    const timesRetrieved = 0; 
+    onMount(() => 
+        {
+            lastSearchedId = id;
+        })
 
-    export const fetchPlaylist = async () => {
+    export const fetchPlaylist = async () => 
+    {
+
         const token = $accessToken;
         const playlistObject = await fetch(`/api/playlist?token=${token}&id=${id}`)
         const list = await playlistObject.json();
@@ -20,41 +26,22 @@
             let song = songs[x]
             let uri = song.track.uri
             $songs_uri_arr.push(uri)
-            console.log(uri)
         }
 
         console.log($songs_uri_arr)
     }
 
-    $: if (id.length > 0) {
-        fetchPlaylist();
-    }
-
-    $: if ($playlist.length > 0) {
-        console.log("CHECK")
-        let songs = $playlist.tracks.items;
-
-        for (let x = 0; x < songs.length; ++x)
+    $: if (id.length > 0) 
+    {
+        if (lastSearchedId !== id)
         {
-
-            let song = songs[x]
-            let uri = song.track.uri
-            // console.log(typeof(songs_uri_arr))
+            lastSearchedId = id
+            fetchPlaylist()
+        }
+        else {
+            alert('Lmao')
         }
     }
-    // $: if ($playlist ) {
-    //         console.log('Fetched playlist')
-    //         let songs = $playlist.tracks.items;
-
-    //         for (let x = 0; x < songs.length; x++)
-    //         {
-    //             let song = songs[x]
-    //             songs_uri_arr.push(song["track"]["uri"])
-    //         }
-
-    //         console.log(songs_uri_arr)
-    //     }
-
 
 </script>
 
@@ -65,20 +52,4 @@
     <PlaylistLayout>
         
     </PlaylistLayout>
-    
 {/if}
-
-
-<style>
-
-    div{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 300px;
-        background-color: dodgerblue;
-        margin: auto;
-        margin-top: 20px;
-    }
-</style>

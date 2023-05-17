@@ -4,42 +4,53 @@
     export let urlSearchInput = '';
     export let playlistID = ''; 
     import FetchPlaylist from "./fetchPlaylist.svelte";
+    let visible = false;
 
-    export const fetchMe = async () => {
-        const token = $accessToken;
-        const userObject = await fetch(`/api/me?token=${token}`)
-        const list = await userObject.json();
-        $user = list;
-        console.log($user);
+    export const fetchUser = async () => 
+    {
+        let accessToken = $accessToken;
+
+        $user = await fetch(`api/me?token=${accessToken}`)
+        .then((response) => response.json())
+        console.log($user)
     }
 
     onMount(async () => {
-		fetchMe();
+        fetchUser();
+        visible = true;
 	});
-    
 
-    const parseID = (urlSearchInput) => {
-        const regex = /^https:\/\/open\.spotify\.com\/playlist\/(\w{22})/;
-        const match = urlSearchInput.match(regex);
-        if (match) {
-            playlistID = match[1]
-        } 
+    const parseUrlForPlaylistId = (urlSearchInput) => 
+    {
+        const regexPattern = /^https:\/\/open\.spotify\.com\/playlist\/(\w{22})/
+        const matchedId = urlSearchInput.match(regexPattern)
+
+        if (matchedId)
+        {
+            playlistID = matchedId[1]
+        }
+
+        else {
+            // document.getElementById("input-url").classList.add('error-input');
+            alert('Oops, that link is invalid. Try again with a different link, or visit the guide for help.')
+        }
     }
-
     
 </script>
 
+{#if visible}
 <div class="title">
     <h1>Hey <h1 class="user-display-name">{$user.display_name}
     </h1>, what playlists do you want to clone today?</h1>
 </div>
 
 <div class="form-container">
-    <input type="text" placeholder="Enter Playlist URL" bind:value={urlSearchInput}>
-    <button on:click|preventDefault = {() => parseID(urlSearchInput)}>Retrieve Playlist</button>
+    <input type="text" placeholder="Enter Playlist URL" bind:value={urlSearchInput} id="input-url">
+    <button on:click|preventDefault = {() => parseUrlForPlaylistId(urlSearchInput)}>Retrieve Playlist</button>
 </div>
 
 <FetchPlaylist id={playlistID}/>
+{/if}
 <style>
 
     .title {
@@ -62,12 +73,12 @@
 
     .form-container {
         width: 70%;
-        padding: 8px;
+        padding: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: auto;
-        gap:5vw;
+        gap:5%;
     }
 
     input[type="text"] {
@@ -84,6 +95,10 @@
     input[type="text"]:focus {
         border: 4.5px solid rgb(176, 55, 182);
     }
+
+    /* .error-input {
+        border: 4.5px solid red;
+    } */
 
     button {
         width: 20%;
