@@ -1,7 +1,7 @@
  <script>
    import { goto } from '$app/navigation';
    import { onMount } from 'svelte';
-   import { fade } from 'svelte/transition';
+   import { fade, fly } from 'svelte/transition';
    let pageTitle = "Duplify";
    let pageSubtitle = "Clone the contents of other Spotify playlists to a personal playlist!";
    let visible = false;
@@ -34,7 +34,7 @@
  
 
  {#if visible}
- <div in:fade>
+ <div transition:fly="{{ y: 200, duration: 2000 }}">
    <h1 class="text-title">{pageTitle}</h1>
    <h2 class="text-subtitle">{pageSubtitle}</h2>
    <button on:click={handleLogin} class="button-login">Login</button>
