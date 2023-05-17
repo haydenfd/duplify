@@ -34,7 +34,7 @@
     </h1>, what playlists do you want to clone today?</h1>
 </div>
 
-<div>
+<div class="form-container">
     <input type="text" placeholder="Enter Playlist URL" bind:value={urlSearchInput}>
     <button on:click|preventDefault = {() => parseID(urlSearchInput)}>Retrieve Playlist</button>
 </div>
@@ -43,13 +43,14 @@
 <style>
 
     .title {
-        margin-top: 45px;
-        margin-bottom: 45px;
-        width: 50%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 80%;
         text-align: center;
         display: flex;
         justify-content: center;
     }
+
     div {
         width: 50%;
         padding: 8px;
@@ -59,15 +60,24 @@
         margin: auto;
     }
 
+    .form-container {
+        width: 70%;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        gap:5vw;
+    }
+
     input[type="text"] {
-        padding: 16px;
+        padding: 14px;
         border: 4.5px solid #4A4A4A;
         outline: none;
         border-radius: 8px;
-        font-size: 16px;
-        width: 70%;
+        width: 60%;
         font-weight: 600;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     input[type="text"]:focus {
@@ -76,13 +86,13 @@
 
     button {
         width: 20%;
-        padding: 19px;
+        padding: 18px;
         background-color: #1DB954;
         border: none;
         outline: none;
         color: white;
         font-weight: 600;
-        font-size: 20px;
+        font-size: 18px;
         border-radius: 8px;
         transition: all 0.28s ease-in-out;
         cursor: pointer;
@@ -93,7 +103,7 @@
     }
 
     h1 {
-        font-size: 36px;
+        font-size: 28px;
     }
 
     .user-display-name {

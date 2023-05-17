@@ -6,7 +6,7 @@
         $accessToken = null;
         if (browser)
         {
-            window.localStorage.setItem('accessToken', null);
+            window.sessionStorage.setItem('accessToken', null);
             window.location.href='/login'
         }
         
@@ -42,19 +42,19 @@
         align-items: baseline;
         justify-content: space-around;
         background-color: #1DB954;
-        padding: 20px;
+        padding: 14px;
     }
 
     button {
         background-color: transparent;
         border: 2px solid transparent;
-        font-size: 28px;
+        font-size: 26px;
         color: white;
-        font-weight: 700;
+        font-weight: 600;
         font-family: 'Montserrat';
-        padding:16px;
+        padding:10px;
         cursor: pointer;
-        border-radius: 12px;
+        border-radius: 16px;
         transition: all 0.28s ease-in-out;
     }
 
