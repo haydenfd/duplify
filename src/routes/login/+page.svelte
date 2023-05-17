@@ -1,14 +1,18 @@
  <script>
    import { goto } from '$app/navigation';
    import { onMount } from 'svelte';
+   import { fade } from 'svelte/transition';
    let pageTitle = "Duplify";
    let pageSubtitle = "Clone the contents of other Spotify playlists to a personal playlist!";
+   let visible = false;
+   
    function handleLogin() 
    {
      goto('api/auth')
    }
 
    onMount(() => {
+    visible = true;
     startColorAnimation();
   });
 
@@ -29,12 +33,13 @@
  </script>
  
 
- <div>
+ {#if visible}
+ <div in:fade>
    <h1 class="text-title">{pageTitle}</h1>
    <h2 class="text-subtitle">{pageSubtitle}</h2>
    <button on:click={handleLogin} class="button-login">Login</button>
  </div>
- 
+ {/if}
 
  <style>
  
