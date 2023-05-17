@@ -55,15 +55,18 @@
         font-size: 17px;
     }
 
-    .submit-container {
+    .submit-container 
+    {
         margin-bottom: 2rem;
 
     }
 
-    .radio-container {
+    .radio-container 
+    {
         width: 100%;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
+
 
     .create-title {
         color: #1db954;
@@ -109,6 +112,5 @@
     button:hover {
         background-color: rgb(176, 55, 182);
     }
-
 
 </style>

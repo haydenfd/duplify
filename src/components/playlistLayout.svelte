@@ -1,13 +1,10 @@
 <script>
-    export let playlistName = '';
-    export let playlistOwner = '';
     import PlaylistForm from "./playlistForm.svelte";
     import AboutPlaylist from "./aboutPlaylist.svelte";
 
 </script>
 
 <div class="container">
-
     <div class="about-playlist">
         <AboutPlaylist />
     </div>
@@ -21,7 +18,7 @@
     .container {
         background-color: black;
         display: flex;
-        width: 65%;
+        width: 70%;
         color: white;
         display: flex;
         flex-direction: row;
