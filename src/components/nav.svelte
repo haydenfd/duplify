@@ -55,11 +55,11 @@
         font-family: 'Montserrat';
         padding:10px;
         cursor: pointer;
-        border-radius: 16px;
         transition: all 0.28s ease-in-out;
     }
 
     button:hover {
         background-color: rgb(176,55,182);
+        border: 2px solid rgb(176,55,182);
     }
 </style>
