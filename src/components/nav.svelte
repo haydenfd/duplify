@@ -12,7 +12,8 @@
         
     }
 
-    export const handleAboutRedirect = () => {
+    export const handleAboutRedirect = () => 
+    {
         if (browser)
         {
             window.location.href = '/home/about'

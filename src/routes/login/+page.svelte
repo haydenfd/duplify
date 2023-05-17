@@ -1,7 +1,7 @@
  <script>
    import { goto } from '$app/navigation';
    import { onMount } from 'svelte';
-   import { fade, fly } from 'svelte/transition';
+   import {fly} from 'svelte/transition';
    let pageTitle = "Duplify";
    let pageSubtitle = "Clone the contents of other Spotify playlists to a personal playlist!";
    let visible = false;
@@ -13,28 +13,13 @@
 
    onMount(() => {
     visible = true;
-    startColorAnimation();
   });
-
-  function startColorAnimation() 
-  {
-    const title = document.querySelector('.text-title');
-
-    let currentColor = 0;
-    const colors = ["#1DB954", "white", "#B037B6"];
-
-    setInterval(() =>
-   {
-      title.style.color = colors[currentColor];
-      currentColor = (currentColor + 1) % colors.length;
-    }, 1200);
-  }
 
  </script>
  
 
  {#if visible}
- <div transition:fly="{{ y: 200, duration: 2000 }}">
+ <div transition:fly="{{ y: -200, duration: 2500 }}">
    <h1 class="text-title">{pageTitle}</h1>
    <h2 class="text-subtitle">{pageSubtitle}</h2>
    <button on:click={handleLogin} class="button-login">Login</button>
@@ -56,8 +41,7 @@
      font-weight: 700;
      margin-bottom: 20px;
      text-transform: uppercase;
-     transition: color 0.28s ease-in-out;
-     color: #1DB954;
+     color: white;
    }
  
    h2 {
