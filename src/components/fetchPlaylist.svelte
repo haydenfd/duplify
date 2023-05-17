@@ -5,7 +5,8 @@
     import PlaylistLayout from "./playlistLayout.svelte";
     import { playlist } from "../utils/store";
     import { onMount } from "svelte";
-    import { slide } from "svelte/transition";
+    import { blur } from "svelte/transition";
+    import {expoIn} from "svelte/easing";
     let visible = false;
 
     onMount(() => 
@@ -50,7 +51,7 @@
     <div></div>
     {:else}
     {#if visible}
-    <div transition:slide>
+    <div transition:blur="{{duration: 1200, easing: expoIn}}"  >
         <PlaylistLayout>
             
         </PlaylistLayout>
