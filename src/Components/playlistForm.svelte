@@ -1,24 +1,42 @@
 <script>
+    import {user, accessToken, songs_uri_arr} from '../utils'
     export let name='';
     export let owner='';
     export let length = '';
 
+
+    export let newPlaylistName='';
+    export let newPlaylistDescription='';
+
     const handleSubmit = () => {
-        alert('Submitted')
+        submitForm()
     }
+
+    const submitForm = async () => 
+    {
+        const token = $accessToken
+        const user_id = $user["id"]
+        const arr = $songs_uri_arr
+        const response = await fetch(`/api/playlist?name=${newPlaylistName}&scope=Public&desc=${newPlaylistDescription}&user=${user_id}&token=${token}&uri=${arr}`, 
+        {
+            method: 'POST'
+        }).then(data => data.json()).then(() => alert('Playlist created successfully! Reload your Spotify app.'))
+    }
+
+
 </script>
 
 <div class="playlist-form-container">
     <div class="playlist-info-container">
         <h1>About playlist</h1>
-        <p>Playlist name: {name}</p>
-        <p>Playlist owner: {owner}</p>
-        <p>Playlist length: {length}</p>
+        <h3>{name}</h3>
+        <h3>{owner}</h3>
+        <h3>{length} songs</h3>
     </div>
     <div class="create-playlist-container">
         <h1>Create your playlist</h1>
-        <input type="text" placeholder="Give your playlist a name"/>
-        <input type="text" placeholder="Description? (optional)" />
+        <input type="text" placeholder="Give your playlist a name"  bind:value={newPlaylistName}/>
+        <input type="text" placeholder="Description? (optional)" bind:value={newPlaylistDescription}/>
         <button type="submit" on:click|preventDefault={handleSubmit}>Create</button>
     </div>
 </div>
@@ -40,6 +58,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
         border-top-left-radius: 16px;
         border-bottom-left-radius: 16px;
     }
@@ -60,8 +79,12 @@
         color: #1DB954;
     }
 
+    h3 {
+        font-size: 22px;
+    }
+
     input[type="text"] {
-        margin: 20px auto;
+        margin: 15px auto;
         width: 80%;
         border-radius: 4px;
         padding: 8px;
@@ -83,7 +106,7 @@
         padding: 12px;
         font-weight: 700;
         border: 2px solid transparent;
-        margin: 20px auto;
+        margin: 20px auto 20px auto;
         outline: none;
         width: 120px;
         font-size: 18px;
@@ -95,4 +118,5 @@
     button[type="submit"]:hover {
         background-color: rgb(176, 55, 182) ;
     }
+
 </style>

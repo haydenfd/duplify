@@ -11,17 +11,30 @@
         }
     }
 
+    export let handleAboutRedirect = () => {
+        if (browser)
+        {
+            window.location.href = '/about'
+        }
+    }
+
+    export let handleGuideRedirect = () => {
+        if (browser)
+        {
+            window.location.href = '/guide'
+        }
+    }
+
     export let handleLogout = () => {
         
         if (browser)
         {
             $accessToken = null;
-            window.sessionStorage.setItem('accessToken', null);
+            window.sessionStorage.clear();
             window.location.href='/login'
         }
     }
 </script>
-
 
 
 <nav class="navbar">
@@ -33,17 +46,17 @@
    <div class="menu-container">
        <ul>
            <li>
-               <a href="/home">Home</a>
+               <button on:click={handleHomeRedirect}>Home</button>
            </li>
            <li>
-               <a href="/about">About</a>
+               <button on:click={handleAboutRedirect}>About</button>
            </li>
            <li>
-               <a href="/guide">Guide</a>
+               <button on:click={handleGuideRedirect}>Guide</button>
            </li>
            <li>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-               <a href="#top" on:click={handleLogout}>Logout</a>
+               <button on:click={handleLogout}>Logout</button>
            </li>
        </ul>
    </div>
@@ -76,20 +89,21 @@
         justify-content: space-evenly;
     }
 
-    li {
+    button {
         font-size: 21px;
         padding: 15px;
         transition: all 0.3s ease-in-out;
-    }
-
-    li:hover {
-        background-color: #B037B6;
-    }
-
-    a {
-        text-decoration: none;
-        color: white;
+        font-family: 'Montserrat';
+        border:3px solid transparent;
+        border-radius: 4px;
+        background-color: transparent;
+        color:white;
         font-weight: 600;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #B037B6;
     }
 
     .duplify-logo-title {

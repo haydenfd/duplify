@@ -2,6 +2,7 @@
     import { user,accessToken, playlist, songs_uri_arr} from '../../../utils';
     import PlaylistForm from '../../../components/playlistForm.svelte';
     import { onMount } from 'svelte';
+    import { browser } from "$app/environment";
 
     $: name = $user.display_name
     export let urlSearchInput = '';
@@ -17,43 +18,6 @@
         }
     })
 
-    // export const fetchPlaylist = async () => 
-    // {
-
-    //     const token = $accessToken;
-    //     const playlistObject = await fetch(`/api/playlist?token=${token}&id=${id}`)
-    //     const list = await playlistObject.json();
-    //     $playlist = list;
-
-    //     let songs = $playlist.tracks.items;
-    //     console.log($playlist)
-
-    //     for (let x = 0; x < songs.length; ++x)
-    //     {
-    //         let song = songs[x]
-    //         let uri = song.track.uri
-    //         $songs_uri_arr.push(uri)
-    //     }
-
-    //     playlistVisible = true
-    //     console.log($songs_uri_arr)
-    // }
-
- const extractPlaylistIdFromUrl = (urlSearchInput) => 
-{
-    const regexPattern = /^https:\/\/open\.spotify\.com\/playlist\/(\w{22})/
-    const matchedId = urlSearchInput.match(regexPattern)
-
-    if (matchedId)
-    {
-        playlistID = matchedId[1]
-        return matchedId[1]
-    }
-
-    else {
-        // alert('Oops, that link is invalid. Try again with a different link, or visit the guide for help.')
-    }
-}
 
     let visible = false
 
@@ -104,7 +68,26 @@
     }
     }
 
+    const checkForToken = () => {
+        if (browser)
+        {
+            if (window.sessionStorage.getItem("accessToken") === null)
+            {
+                return false
+            }
+
+            else {
+                return true;
+            }
+        }
+    }
+
     onMount(() => {
+    
+        if (!checkForToken)
+        {
+            window.location.href = '/login'
+        }
         if (name === undefined)
         {
             fetchUser()

@@ -69,10 +69,12 @@ export async function POST({url}) {
         response => response.json()
         ).then((data) => 
         {
+        console.log(newlyCreatedPlaylistID)
         newlyCreatedPlaylistID = data.id
         _addSongsToPlaylist(accessToken, newlyCreatedPlaylistID, songsUriArray)
     })
 
+    console.log(res)
     return json({"status":"200"})
 }
 
