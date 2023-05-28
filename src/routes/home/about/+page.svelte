@@ -1,10 +1,9 @@
-<script>
+<!-- <script>
     import Nav from "../../../components/nav.svelte";
     import { onMount } from "svelte";
     // import { fly } from "svelte/transition";
     let visible = false;
 
-    //helps spam?
     let name = 'haydenfds'
     let host = 'gmail'
     let dom = 'com'
@@ -70,5 +69,31 @@
         font-weight: 700;
     }
 
+</style> -->
 
+<script>
+    import Nav from "../../../components/nav.svelte";
+</script>
+
+<Nav>
+</Nav>
+
+<div class="about-container">
+    <h1>About Duplify</h1>
+    <p>
+        Why I did this?
+    </p>
+</div>
+
+<style>
+    .about-container {
+        display: flex;
+        width: 70%;
+        flex-direction: column;
+        margin: 20px auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
 </style>
