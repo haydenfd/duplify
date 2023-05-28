@@ -7,3 +7,5 @@ export let generateRandomString = function(length = 16) {
     }
     return text;
 };
+
+

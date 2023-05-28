@@ -12,4 +12,5 @@ accessToken.subscribe((value) => {
 });
 
 export const user = writable({})
-
+export const playlist = writable({})
+export const songs_uri_arr = writable([])

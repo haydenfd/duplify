@@ -1,9 +1,10 @@
 <script>
     import Navbar from "../../Components/navbar.svelte"
+    import { fade, fly } from 'svelte/transition';
 </script>
 
 <Navbar></Navbar>
-<div>
+<div in:fly="{{ y: -200, duration: 2200 }}" out:fade="{{delay: 500,duration: 800}}">
     <slot></slot>
 </div>
 
