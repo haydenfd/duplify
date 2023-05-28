@@ -72,7 +72,7 @@
 </style> -->
 
 <script>
-    import Nav from "../../../components/nav.svelte";
+    import Nav from "../../components/nav.svelte";
 </script>
 
 <Nav>
@@ -81,7 +81,7 @@
 <div class="about-container">
     <h1>About Duplify</h1>
     <p>
-        Why Iam this?
+        Why I this?
     </p>
 </div>
 
