@@ -1,6 +1,6 @@
 <script>
     import { user,accessToken, playlist, songs_uri_arr} from '../../../utils';
-    import Playlistform from '../../../components/playform.svelte'
+    // import Playlistform from '../../../components/playform.svelte'
     import { onMount } from 'svelte';
     import { browser } from "$app/environment";
 
@@ -121,7 +121,7 @@
 
 <FetchPlaylist id={playlistID}/> -->
 {#if playlistVisible}
-    <Playlistform name={playlist_name} owner={playlist_owner} length={playlist_length}/>
+    <!-- <Playlistform name={playlist_name} owner={playlist_owner} length={playlist_length}/> -->
 {/if}
 {/if}
 

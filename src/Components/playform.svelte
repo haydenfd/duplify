@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import {user, accessToken, songs_uri_arr} from '../utils'
     export let name='';
     export let owner='';
@@ -119,4 +119,4 @@
         background-color: rgb(176, 55, 182) ;
     }
 
-</style>
+</style> -->
