@@ -2,33 +2,14 @@
     import Navbar from "../Components/navbar.svelte";
     import { browser } from "$app/environment";
     import { onMount } from 'svelte';
+    import {accessToken} from '../utils'
 
-    onMount(() => {
-        if (browser)
-    {
-        console.log('Hello')
-        if (window.sessionStorage.getItem("accessToken") === null)
+    $: {
+        if (!$accessToken)
         {
-            window.location.href = '/login'
-        }
-
-        else {
-            window.location.href = '/home'
-        }
-    }
-    })
-
-
-    const checkForToken = () => {
-        if (browser)
-        {
-            if (window.sessionStorage.getItem("accessToken") === null)
+            if (browser)
             {
-                return false
-            }
-
-            else {
-                return true;
+                window.location.href = '/login'
             }
         }
     }
