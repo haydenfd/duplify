@@ -1,6 +1,6 @@
 <script>
     import { user,accessToken, playlist, songs_uri_arr} from '../../../utils';
-    import Playlistform from '../../../components/playlistform.svelte'
+    import Playlistform from '../../../components/playform.svelte'
     import { onMount } from 'svelte';
     import { browser } from "$app/environment";
 
