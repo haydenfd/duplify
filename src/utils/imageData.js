@@ -1,8 +1,8 @@
-import findPlaylist  from "../../../utils/guide-images/find-playlist.png";
-import getPlaylistURL from '../../../utils/guide-images/get-playlist-url.png'
-import searchPlaylistURL from '../../../utils/guide-images/search-playlist-url.png'
-import createPlaylist from '../../../utils/guide-images/create-playlist.png'
-import playlistCreationConfirmation from '../../../utils/guide-images/playlist-creation-confirmation.png'
+import findPlaylist  from "./guide-images/find-playlist.png";
+import getPlaylistURL from './guide-images/get-playlist-url.png'
+import searchPlaylistURL from './guide-images/search-playlist-url.png'
+import createPlaylist from './guide-images/create-playlist.png'
+import playlistCreationConfirmation from './guide-images/playlist-creation-confirmation.png'
 
 export const images = [
     {
