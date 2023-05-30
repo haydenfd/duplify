@@ -5,7 +5,7 @@
     let pageTitle = "Duplify";
     let pageSubtitle = "Clone the contents of other Spotify playlists to a personal playlist!";
     let visible = false;
-    
+    // import Footer from '../../components/footer.svelte';
     function handleLogin() 
     {
       goto('api/auth')
@@ -19,10 +19,11 @@
   
  
   {#if visible}
-  <div transition:fly="{{ y: -200, duration: 2500 }}">
+  <div>
     <h1 class="text-title">{pageTitle}</h1>
     <h2 class="text-subtitle">{pageSubtitle}</h2>
     <button on:click={handleLogin} class="button-login">Login</button>
+      <!-- <Footer /> -->
   </div>
   {/if}
  
@@ -34,6 +35,7 @@
       align-items: center;
       justify-content: center;
       height: 80vh;
+      overflow: auto;
     }
   
     h1 {
@@ -68,6 +70,7 @@
     button:hover {
       background-color: #B037B6;
    }
+  
  
   </style>
   

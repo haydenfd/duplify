@@ -194,7 +194,7 @@
     }
 
     .search-url {
-        padding: 12px;
+        padding: 10px;
         border: 4.5px solid transparent;
         outline: none;
         border-radius: 8px;

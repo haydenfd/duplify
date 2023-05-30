@@ -1,19 +1,17 @@
 <script>
-    import Navbar from "../Components/navbar.svelte";
     import { browser } from "$app/environment";
-    import { onMount } from 'svelte';
     import {accessToken} from '../utils'
 
     $: {
-        if (!$accessToken)
-        {
-            if (browser)
+        if (browser) {
+            if ((window.sessionStorage.getItem("accessToken").length < 230) || ($accessToken.length < 230))
             {
-                window.location.href = '/login'
+                console.log('Re-routed')
+                window.location.href='/login'            
             }
         }
     }
     
 </script>
 
-<Navbar />
+
