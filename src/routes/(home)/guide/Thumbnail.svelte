@@ -1,7 +1,6 @@
 <script>
 	export let thumbImg;
 	export let altTag;
-	export let titleLink;
 	export let id;
 	export let selected;
 </script>
@@ -9,13 +8,16 @@
 <style>
 /* Six columns side by side */
 .thumbnail-cont {
-  width: 16.66%;
+  width: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #ddd;
 }
 
+.thumbnail-cont-active {
+	background-color: #1DB954;
+}
 /* Add a transparency effect for thumnbail images */
 .sample {
   opacity: 0.4;
@@ -42,14 +44,16 @@ img {
 	width: 85%;
 	height: 85%;
 }
+
+
 </style>
 
 
-<div class="thumbnail-cont">
+<div class="thumbnail-cont {selected? 'thumbnail-cont-active':''}">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<img class="sample cursor" 
 			class:active={selected} 
 			{id} src={thumbImg} 
 			alt={altTag} 
-			title="Image from {titleLink}" 
 			on:click />
 </div>

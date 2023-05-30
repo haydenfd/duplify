@@ -35,7 +35,7 @@ let imageShowingIndex = 0;
 	width: 40vw;
 	display: flex;
 	flex-direction: column;
-	margin: 5% auto;
+	margin: 4% auto;
 	background-color: #222;
 	box-shadow: 0 0 10px black;
 }	
@@ -50,8 +50,18 @@ let imageShowingIndex = 0;
 	display: flex;
 	align-self: flex-end;
 }	
+
+p {
+    width: 80vw;
+    line-height: 150%;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+}
 </style>
 
+<h1>How to use</h1>
+<p>This annotated slideshow guides you on how to use Duplify. I'm actively trying to improve the instructions and layout of the slide images. If you have any feedback on how I can improve this guide, please feel free to reach out!</p>
 <div class="wrapper">
 
 	<!-- image gallery -->
@@ -71,10 +81,9 @@ let imageShowingIndex = 0;
 
 	<!-- Thumbnail images -->
 	<div class="thumbnails-row">
-			{#each images as {id, imgurl, name, attribution}}
+			{#each images as {id, imgurl, name}}
 				<Thumbnail thumbImg={imgurl} 
 									 altTag={name} 
-									 titleLink={attribution}
 									 {id} 
 									 selected={imageShowingIndex === id}
 									 on:click={() => goToSlide(id)} />

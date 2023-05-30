@@ -8,12 +8,14 @@
 
 <style>	
 .numbertext {
-  color: #f2f2f2;
-  font-size: .9rem;
+  color: #B037B6;
+  font-size: 1.5rem;
   padding: 8px 12px;
-text-shadow: 1px 1px black;
+  text-shadow: 1px 1px black;
   position: absolute;
+  font-weight: 600;
   top: 0;
+  right: 0;
 }
 	
 img {
@@ -23,7 +25,6 @@ img {
 </style>
 
 
-<!-- Full-width images with number text -->
 <div class="mySlides">
 	<div class="numbertext">{slideNo} / {totalSlides}</div>
 	<img src={image} alt={altTag} title={attr}>

@@ -14,8 +14,9 @@
   text-align: center;
   background-color: #222;
 	font-size: 1.2rem;
-  padding: 2px 16px;
+  padding: 2px 20px;
   color: white;
+  font-weight: 600;
 }
 	
 /* Next & previous buttons */
@@ -27,30 +28,31 @@
   width: auto;
 /*   padding: 16px;
   margin-top: -50px; */
-  color: hsla(125, 86%, 100%, .7);
+  color: #1DB954;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 2.8rem;
   border-radius: 0 3px 3px 0;
   user-select: none;
   -webkit-user-select: none;
+  text-decoration: none;
 }
 
 /* Position the "next button" to the right */
 .next {
-/*   right: 15vw; */
+  /* right: 15vw; */
   border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  color: hsla(125, 26%, 64%, .5);
-	text-decoration: none;
+  color: #B037B6;
+  transform: scale(1.3);
 }	
 	
 .prev:active,
 .next:active {
-  color: hsla(125, 86%, 64%, 1);
+  color: #1DB954;
 	text-decoration: none;
 }		
 	
@@ -58,10 +60,10 @@
 
 
 <div class="caption-container">
-	<!-- Previous Arrow -->
-	<a href="#arrowL" class="arrow prev" on:click={() => dispatch('prevClick')}>&#10094;</a>
-		<!-- Caption -->
+
+	<!-- svelte-ignore a11y-invalid-attribute -->
+	<a href="javascript:void(0)" class="arrow prev" on:click={() => dispatch('prevClick')}>&#10094;</a>
 	<p id="caption">{caption}</p>
-		<!-- Next Arrow -->
-	<a href="#arrowR" class="arrow next" on:click={() => dispatch('nextClick')}>&#10095;</a>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+	<a href="javascript:void(0)" class="arrow next" on:click={() => dispatch('nextClick')}>&#10095;</a>
 </div>

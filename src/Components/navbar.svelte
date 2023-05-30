@@ -91,7 +91,7 @@
 
     button {
         font-size: 21px;
-        padding: 15px;
+        padding: 10px;
         transition: all 0.3s ease-in-out;
         font-family: 'Montserrat';
         border:3px solid transparent;
@@ -107,7 +107,7 @@
     }
 
     .duplify-logo-title {
-        font-size: 36px;
+        font-size: 30px;
         cursor: pointer;
     }
 
