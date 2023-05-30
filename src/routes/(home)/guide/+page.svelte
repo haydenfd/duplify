@@ -1,9 +1,9 @@
 <script>
 
-import { images } from '../../../utils'
-import Slider from '../../../components/Slider.svelte';
-import Thumbnail from '../../../components/Thumbnail.svelte';
-import Caption from '../../../components/Caption.svelte';
+import { images } from './imageData.js';
+import Slider from './Slider.svelte';
+import Thumbnail from './Thumbnail.svelte';
+import Caption from './Caption.svelte';
 /* IMAGE TO SHOW */
 let imageShowingIndex = 0;
 	$: console.log(imageShowingIndex);
